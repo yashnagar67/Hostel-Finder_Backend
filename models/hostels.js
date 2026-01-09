@@ -1,5 +1,5 @@
 const mongoos=require("mongoose")
-const { required } = require("yargs")
+
 const hostelSchema=new mongoos.Schema({
     name:{
         type:String,
