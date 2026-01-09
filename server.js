@@ -8,7 +8,7 @@ require("dotenv").config();
 const app = express();
 
 // Environment variables
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1000;
 const MONGO_URI = process.env.MONGOURI || "mongodb://localhost:27017/HostelFinder";
 const NODE_ENV = process.env.NODE_ENV || "development";
 
