@@ -21,7 +21,7 @@ function imagetoGenrativeAiFOrmate(buffer,mimeType){
 }
 
 const genAI=new GoogleGenAI({
-       apiKey:process.env.GEMINI_API_KAY
+       apiKey:process.env.GEMINI_API_KEY
 })
 route.post("/extract",upload.single("imgUrl"),async(req,res)=>{
        console.log("Some one touch this route")
