@@ -1,0 +1,43 @@
+ 
+    {
+        name: "Mothers Home (Boys)",
+        address: "J-17 IJK Block, Landmark Prime, Near Allen, Kunadi, Kota, Rajasthan 324008",
+        contactNumber: "+91 70156 89412",
+        facilities: ["Premium Mess", "Library", "Laundry", "CCTV Security", "RO Water"],
+        imageUrl: "https://content.jdmagicbox.com/v2/comp/kota-rajasthan/i3/9999px744.x744.200619222348.v9i3/catalogue/mother-s-home-kunadi-kota-rajasthan-guest-house-wb8c3i1jmj.jpg",
+        price: 11000
+    },
+    {
+        name: "HelloWorld Meridian (Boys)",
+        address: "Orilite Life Spaces, Meridian Heights, Electricity Board Area, Kota, Rajasthan 324008",
+        contactNumber: "+91 88800 08888",
+        facilities: ["Gaming Zone", "Professional Housekeeping", "WiFi", "Community Lounge", "Power Backup"],
+        imageUrl: "", // No direct static URL available
+        price: 13000
+    },
+    {
+        name: "Radhika Girls Residency",
+        address: "320, Rajeev Gandhi Nagar, Old, Kota, Rajasthan 324005",
+        contactNumber: "+91 73000 05265",
+        facilities: ["AC Rooms", "Biometric Attendance", "Vegetarian Mess", "24x7 Guard"],
+        imageUrl: "", 
+        price: 9000
+    },
+    {
+        name: "Swastik Boys Hostel",
+        address: "J-9, J-Block, Coral Park, Near Allen Supath, Naya Nohra, Kota, Rajasthan 324001",
+        contactNumber: "+91 94136 53217",
+        facilities: ["Study Room", "Balcony Rooms", "Cooler/AC", "Postal Service"],
+        imageUrl: "https://boyshostelallensupath.com/wp-content/uploads/2024/03/2023-06-19.jpg",
+        price: 7000
+    },
+    {
+        name: "The Princess Girls Hostel",
+        address: "A-40/41, Landmark City, Kunadi, Kota, Rajasthan 324008",
+        contactNumber: "+91 63762 31271",
+        facilities: ["High Security", "Lift", "Gym", "Premium Food Menu"],
+        imageUrl: "",
+        price: 12000
+    }
+
+

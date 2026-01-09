@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: hostel-finder-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGOURI
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ADMINPASSWORD
+        sync: false
+      - key: PORT
+        value: 10000
