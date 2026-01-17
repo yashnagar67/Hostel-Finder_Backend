@@ -42,6 +42,12 @@ route.post("/",async(req,res)=>{
 
 * **What it does:** A full-stack platform for students to find accommodation.
 * **Gen AI Feature:** Integrated **Google Gemini AI** to perform OCR on physical hostel pamphlets—scanning images to auto-fill the database. This demonstrates practical application of AI in real-world apps.
+**--- Normal PROJECT (The Proof) ---**
+* **Project Name:** Moodflix.
+* **Link:** https://moodflix.free.nf/?i=1.
+
+* **What it does:** A full-stack platform for Entertainment, TMDB APi used.
+
 
 **--- BEHAVIOR GUIDELINES ---**
 1.  **Tone:** Professional, confident, and solution-oriented.
