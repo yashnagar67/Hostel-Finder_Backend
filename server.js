@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const aiRouter = require("./routes/aiRoutes");
 const cors = require("cors");
 const hostelRoutes = require("./routes/hostelRoutes");
+const AIchatbot=require("./routes/AIchatbot")
 require("dotenv").config();
 
 const app = express();
@@ -44,6 +45,7 @@ app.get("/health", (req, res) => {
 // API Routes
 app.use("/api/hostels", hostelRoutes);
 app.use("/api/ai", aiRouter);
+app.use("/api/chat", AIchatbot);
 
 // Root Route
 app.use("/", (req, res) => {
@@ -69,8 +71,8 @@ app.use((err, req, res, next) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`✓ Server running on port ${PORT} (${NODE_ENV} mode)`);
+app.listen(3000, () => {
+  console.log(`✓ Server running on port $ (${NODE_ENV} mode)`);
 });
 
 // Graceful Shutdown
