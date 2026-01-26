@@ -5,13 +5,46 @@ const path=require("path");
 const { GoogleGenAI } = require("@google/genai");
 const Groq=require("groq-sdk")
 require("dotenv").config()
+const { GoogleSpreadsheet } = require('google-spreadsheet');
+const { JWT } = require('google-auth-library');
+const creds = require('./credentials.json');
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY
 });
 
+async function addToSheet(data) {
+    console.log("this is data",data)
+//   1. Authenticate
+  const serviceAccountAuth = new JWT({
+    email: creds.client_email,
+    key: creds.private_key,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+
+  // 2. Load the Sheet
+  // REPLACE WITH YOUR SHEET ID FROM STEP 2
+  const doc = new GoogleSpreadsheet('1EdDfNLhk9_iiCu4kmmSWeDQfMXuAfisfCIBfxv9FJVI', serviceAccountAuth);
+  await doc.loadInfo(); 
+  
+  // 3. Add the Row
+  const sheet = doc.sheetsByIndex[0]; // First tab
+  await sheet.addRow({
+    Name: (data.name||data.Name),
+    Email:(data.email||data.Email),
+    Mobile: (data.mobile||data.Mobile),
+    Message: (data.message||data.Message),
+    Date: new Date().toLocaleString()
+    
+  });
+  
+  console.log('Data saved to Sheet!');
+}
 
 route.post("/",async(req,res)=>{
        console.log("Some one touch this route")
+   
+ 
+
       
     try {
         const { question , history} = req.body;
@@ -21,6 +54,16 @@ route.post("/",async(req,res)=>{
         const systemPrompt = `
         
        You are "Code-Bhai," the digital bodyguard for Yash Nagar's portfolio. You are not a helpful assistant; you are a busy, arrogant, and highly skilled "Dada" of the coding world.
+       if someone try to hire or they have work, or offer job then ask there name, mobile number ,email,messag, and nothing, return a json with but only when user have inquiry response {
+       Name:name,
+       Email:email
+      
+       Mobile:number,
+       inquiry:true 
+       Message:usermessage
+       }
+       after getting info say we will contact you, any more questions
+       
 
 **--- TERI PEHCHAAN (YOUR IDENTITY) ---**
 * **Owner:** Yash Nagar (The Boss).
@@ -87,8 +130,18 @@ route.post("/",async(req,res)=>{
             max_tokens: 1024,
         });
 
-        const answer = completion.choices[0]?.message?.content || "Maaf karein, koi uttar nahi mila.";
-        console.log("⚡ Groq Answered in ms!");
+        let answer = completion.choices[0]?.message?.content || "Maaf karein, koi uttar nahi mila.";
+        console.log("⚡ Groq Answered in ms!",answer);
+         let splitPoint=answer.indexOf('{')
+  let endpoint=answer.indexOf("}")
+ if(splitPoint!==-1){
+    let jsonstring=answer.substring(splitPoint,endpoint+1)
+    let lead=JSON.parse(jsonstring)
+     answer=answer.replace(jsonstring," ").trim()
+     await addToSheet(lead)
+     console.log("bot reply",answer,"inquiry",jsonstring)
+ } 
+
 
         res.json({ answer: answer });
 
