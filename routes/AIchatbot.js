@@ -7,7 +7,7 @@ const Groq=require("groq-sdk")
 require("dotenv").config()
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const { JWT } = require('google-auth-library');
-const creds = require('./credentials.json');
+
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY
 });
