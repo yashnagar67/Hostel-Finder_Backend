@@ -16,8 +16,8 @@ async function addToSheet(data) {
     console.log("this is data",data)
 //   1. Authenticate
   const serviceAccountAuth = new JWT({
-    email: creds.client_email,
-    key: creds.private_key,
+    email: process.env.client_email,
+    key: process.env.private_key,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
