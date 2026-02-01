@@ -30,7 +30,7 @@ mongoose
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://vivabot.in'],
+    origin: ['http://localhost:5173', 'https://vivabot.in','https://www.vivabot.in/'],
     credentials: true
 }));
 app.use(express.json({ limit: "10mb" }));
