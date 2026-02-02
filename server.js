@@ -4,7 +4,7 @@ const aiRouter = require("./routes/aiRoutes");
 const cors = require("cors");
 const hostelRoutes = require("./routes/hostelRoutes");
 const AIchatbot=require("./routes/AIchatbot")
-const VivaAi=require("./routes/empheral_TOkens")
+// const VivaAi=require("./routes/empheral_TOkens").default
 require("dotenv").config();
 
 const app = express();
@@ -30,7 +30,9 @@ mongoose
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://vivabot.in','https://www.vivabot.in/'],
+    origin: ['http://localhost:5173', 'https://vivabot.in','https://www.vivabot.in/',
+      'https://yashnagarkota.in','https://www.yashnagarkota.in/'
+    ],
     credentials: true
 }));
 app.use(express.json({ limit: "10mb" }));
@@ -50,7 +52,7 @@ app.get("/health", (req, res) => {
 app.use("/api/hostels", hostelRoutes);
 app.use("/api/ai", aiRouter);
 app.use("/api/chat", AIchatbot);
-app.use("/api/vivaai/",VivaAi)
+// app.use("/api/vivaai/",VivaAi)
 // Root Route
 app.use("/", (req, res) => {
   res.json({

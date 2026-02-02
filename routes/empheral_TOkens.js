@@ -1,38 +1,40 @@
-const express = require("express");
+import express from 'express';
+// Use the new package name
+import { createClient } from '@google/genai';
+
 const route = express.Router();
 
-require("dotenv").config();
+// The new SDK uses a different initialization pattern
+const client = createClient({
+  apiKey: process.env.GEMINI_API_KEY,
+  // CRITICAL: You must specify v1alpha to use ephemeral tokens
+  httpOptions: { apiVersion: 'v1alpha' }
+});
 
-// Simplified endpoint - returns API key for client-side connection
-// NOTE: This is for development only. For production, use a proxy approach.
 route.post("/voice/generate-token", async (req, res) => {
     console.log("Voice token generation requested");
-    
     try {
-        // For now, we'll return the API key
-        // In production, you'd want to implement rate limiting and user authentication
-        
-        if (!process.env.GEMINI_API_KEY) {
-            return res.status(500).json({ 
-                message: "API key not configured",
-                success: false
-            });
-        }
-        
-        res.json({ 
-            apiKey: process.env.GEMINI_API_KEY,
-            success: true,
-            note: "Development mode - API key returned directly"
+        // Correct method: client.authTokens.create
+        const tokenResponse = await client.authTokens.create({
+            config: {
+                uses: 1,
+                // The new SDK handles dates easily
+                expireTime: new Date(Date.now() + 30 * 60 * 1000).toISOString()
+            }
         });
 
+        // The token itself is in the .name field of the response
+        res.json({
+            token: tokenResponse.name,
+            expiresAt: tokenResponse.expireTime
+        });
     } catch (error) {
-        console.error("Token generation error:", error);
-        res.status(500).json({ 
-            message: "Failed to generate voice token", 
-            error: error.message,
-            success: false
+        console.error('Token generation failed:', error);
+        res.status(500).json({
+            error: 'Failed to generate live session token',
+            details: error.message
         });
     }
 });
 
-module.exports = route;
+export default route;
